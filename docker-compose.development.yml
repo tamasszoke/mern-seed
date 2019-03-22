@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  server:
+    container_name: server
+    build:
+      context: ./server
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./server:/server
+  client:
+    container_name: client
+    build:
+      context: ./client
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./client:/client

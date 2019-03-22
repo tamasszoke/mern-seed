@@ -1,0 +1,21 @@
+{
+  "name": "mern-boilerplate",
+  "version": "1.0.0",
+  "description": "README.md",
+  "main": "app.js",
+  "author": "Tamas Szoke",
+  "contact": "tamas.szoke.dev@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "dev:client": "npm start --prefix client/",
+    "dev:server": "npm run dev --prefix server/",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "build": "npm run build --prefix client/ && npm run build --prefix server/",
+    "start": "pm2 start build/app.js -i max",
+    "stop": "pm2 stop all",
+    "delete": "pm2 delete app"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
