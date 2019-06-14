@@ -12,7 +12,7 @@ import Error from './components/Error/Error'
 import Navigation from './components/Navigation/Navigation'
 import Profile from './components/Profile/Profile'
 import { connect } from 'react-redux'
-import { setUrl, setNotifications } from './actions/connectionActions'
+import { setUrl, setAuth, setNotifications } from './actions/connectionActions'
 import ReactNotification from "react-notifications-component"
 import "react-notifications-component/dist/theme.css"
 import "animate.css"
@@ -22,6 +22,7 @@ import {// eslint-disable-next-line
   join,// eslint-disable-next-line
   send// eslint-disable-next-line
 } from './components/SocketIo/Socket'
+import axios from 'axios'
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
   <Route { ...rest }
@@ -41,8 +42,23 @@ class App extends Component {
     this.url = `https://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}`
     this.props.setNotifications(this.notification)
     this.props.setUrl(this.url)
+    axios.defaults.withCredentials = true
   }
- 
+
+  componentDidMount() {
+    axios.interceptors.response.use(undefined, (error) => {
+      if(error.response.status === 401) {
+        this.props.setAuth(false)
+        this.notification({
+          type: 'danger',
+          title: 'Failed!',
+          message: 'Not logged in!'
+        })
+        return Promise.reject(error)
+      }
+    })
+  }
+
   notification(options) {
     const { type, title, message } = options
     this.notificationDOMRef.current.addNotification({
@@ -91,6 +107,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setUrl: url => { dispatch(setUrl(url)) },
+    setAuth: authenticated => { dispatch(setAuth(authenticated)) },
     setNotifications: notifications => { dispatch(setNotifications(notifications)) }
   }
 }
