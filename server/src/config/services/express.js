@@ -13,15 +13,23 @@ const cors = require('cors')
  */
 const init = () => {
   const app = express()
-  app.use(helmet())
-  app.use(cors())
+  const corsOptions = {
+    origin: true,
+    'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Origin': true,
+    'Access-Control-Allow-Headers': true,
+    'Access-Control-Expose-Headers': true,
+    credentials: true
+  }
   app.use('/build/static', express.static(config.clientStaticFolder))
   app.use('/build', express.static(config.clientBuildFolder))
   app.set('views', config.clientBuildFolder)
   app.engine('html', require('ejs').renderFile)
   app.set('view engine', 'html')
-  app.use(cookieParser())
+  app.use(cookieParser(config.redisSecret))
   app.use(bodyParser.json())
+  app.use(cors(corsOptions))
+  app.use(helmet())
   return app
 }
 

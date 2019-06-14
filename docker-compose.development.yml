@@ -1,5 +1,10 @@
 version: '3.7'
 services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    hostname: redis
   server:
     container_name: server
     build:
@@ -10,6 +15,8 @@ services:
       NODE_ENV: development
     volumes:
       - ./server:/server
+    depends_on:
+      - redis
   client:
     container_name: client
     build:

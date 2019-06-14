@@ -6,6 +6,7 @@ Boilerplate for MERN stack development and production.
 
 + [Docker](https://www.docker.com/) containers
 + Using [HTTP/2](https://http2.github.io/)
++ [Redis](https://www.npmjs.com/package/connect-redis) for sessions
 + Folder by Feature structure
 + Minimal [Material UI](https://material-ui.com/) design
 + Built-in React routing, [Redux](https://redux.js.org/)
@@ -65,6 +66,7 @@ Example (include all of these):
     PORT=3001
     CLIENT_HOST=localhost
     CLIENT_PORT=3002
+    REDIS_URL=redis://redis:6379
     SSL_KEY=[SSL_KEY_FILE_NAME]
     SSL_CRT=[SSL_CRT_FILE_NAME]
     DB_HOST=[MONGOLAB_DB_URL]

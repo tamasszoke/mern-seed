@@ -52,11 +52,11 @@ const checkPassword = (email, password, callback) => {
   if (!email || !password) {
     return callback(null)
   }
-  User.find({ email: email, active: true }, (err, user) => {
+  User.findOne({ email: email, active: true }, (err, user) => {
     if (!err && user && user.length !== 0) {
-      const salt = user[0].salt
+      const salt = user.salt
       const hash = createHash(password, salt)
-      if (user[0].password === hash) {
+      if (user.password === hash) {
         return callback(null, user)
       } else {
         return callback(new Error('Wrong password!'), null)

@@ -1,14 +1,24 @@
 'use strict'
 
-const crypto = require('crypto')
-const session = require('express-session')
-const RedisStore = require('connect-redis')(session)
 const config = require('./config')
+const show = require('./logging')
+const session = require('express-session')
+const redis = require('redis')
+const RedisStore = require('connect-redis')(session)
+const RedisClient = redis.createClient(config.redisUrl)
 
 const options = {
-  url: config.redisUrl
+  client: RedisClient
 }
 const redisStore = new RedisStore(options)
+
+RedisClient.on('error', (err) => {
+  show.debug('Redis error: ' + err)
+})
+
+RedisClient.on('ready', () => {
+  show.debug('Redis connected')
+})
 
 /**
  * Initialize redis for session cache
@@ -16,12 +26,13 @@ const redisStore = new RedisStore(options)
 const init = (app) => {
   app.use(session({
     store: redisStore,
-    secret: crypto.randomBytes(48).toString('hex'),
-    resave: false,
-    saveUninitialized: false,
+    secret: config.redisSecret,
+    saveUninitialized: true,
+    resave: true,
     rolling: true,
     cookie: {
-      maxAge: 20 * 1000 // 10 minutes
+      secure: true, // true if https
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     }
   }))
 }

@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const crypto = require('crypto')
 let basePath = path.join(__dirname, '../../../')
 const env = process.env.NODE_ENV
 if (env === 'production') {
@@ -14,6 +15,7 @@ const envConfig = require('dotenv').config({
 if (envConfig.error) {
   throw envConfig.error
 }
+const redisSecret = crypto.randomBytes(48).toString('hex')
 
 /**
  * Test config
@@ -23,12 +25,13 @@ const test = {
   ip: process.env.IP,
   host: process.env.HOST,
   port: process.env.PORT,
+  url: `http://${process.env.CLIENT_HOST}:${process.env.CLIENT_PORT}`,
+  redisUrl: process.env.REDIS_URL,
+  redisSecret,
   sslOptions: {
     key: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_KEY}`)),
     cert: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_CRT}`))
   },
-  url: `http://${process.env.CLIENT_HOST}:${process.env.CLIENT_PORT}`,
-  redisUrl: process.env.REDIS_URL,
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,
@@ -44,12 +47,13 @@ const development = {
   ip: process.env.IP,
   host: process.env.HOST,
   port: process.env.PORT,
+  url: `http://${process.env.CLIENT_HOST}:${process.env.CLIENT_PORT}`,
+  redisUrl: process.env.REDIS_URL,
+  redisSecret,
   sslOptions: {
     key: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_KEY}`)),
     cert: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_CRT}`))
   },
-  url: `http://${process.env.CLIENT_HOST}:${process.env.CLIENT_PORT}`,
-  redisUrl: process.env.REDIS_URL,
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,
@@ -65,12 +69,13 @@ const production = {
   ip: process.env.IP,
   host: process.env.HOST,
   port: process.env.PORT,
+  url: `https://${process.env.HOST}:${process.env.PORT}`,
+  redisUrl: process.env.REDIS_URL,
+  redisSecret,
   sslOptions: {
     key: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_KEY}`)),
     cert: fs.readFileSync(path.join(basePath, `ssl/${process.env.SSL_CRT}`))
   },
-  url: `https://${process.env.HOST}:${process.env.PORT}`,
-  redisUrl: process.env.REDIS_URL,
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,

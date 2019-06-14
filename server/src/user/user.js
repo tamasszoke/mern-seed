@@ -1,13 +1,12 @@
 'use strict'
 
-require('./services/login')
+const login = require('./services/login')
 const logout = require('./services/logout')
 const { register, activate } = require('./services/registration')
 const { recovery, recoveryHash } = require('./services/recovery')
 const { profileUpdate, profileRemove } = require('./services/profile')
 const mail = require('../common/services/email')
 const { config, show } = require('../config')
-const passport = require('passport')
 const action = {}
 
 /**
@@ -26,46 +25,36 @@ action.checkLogin = (req, res) => {
  */
 action.login = (req, res, next) => {
   show.debug('Logging in...')
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
+  login(req, res, next, (err, user) => {
+    if (!err && user) {
+      show.debug('Login success!')
+      const data = {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        location: user.location
+      }
+      return res.json({
+        type: 'login',
+        success: true,
+        user: data
+      })
+    } else if (!err && !user) {
+      show.debug('User not found!')
+      return res.json({
+        type: 'login',
+        success: false
+      })
+    } else {
       show.debug('Login error!')
       return res.json({
         type: 'login',
         success: false
       })
     }
-    if (!user) {
-      show.debug('User not found!')
-      return res.json({
-        type: 'login',
-        success: false
-      })
-    }
-    req.login(user, (err) => {
-      if (!err && user) {
-        show.debug('Login success!')
-        const data = {
-          id: user[0].id,
-          username: user[0].username,
-          name: user[0].name,
-          email: user[0].email,
-          age: user[0].age,
-          location: user[0].location
-        }
-        return res.json({
-          type: 'login',
-          success: true,
-          user: data
-        })
-      } else {
-        show.debug('Login error!')
-        return res.json({
-          type: 'login',
-          success: false
-        })
-      }
-    })
-  })(req, res, next)
+  })
 }
 
 /**
