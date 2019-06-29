@@ -1,6 +1,8 @@
 # MERN Boilerplate
 
-Boilerplate for MERN stack development and production.
+[![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
+
+Boilerplate for MERN stack development, ready for production.
 
 **Highlights**
 
@@ -20,6 +22,22 @@ Boilerplate for MERN stack development and production.
 + Clean code with [ESLint](https://eslint.org/), [JavaScript Standard Style](https://standardjs.com/)
 + [Webpack](https://webpack.js.org/) built production server
 + Using [PM2](http://pm2.keymetrics.io/) (cluster mode) for production
+
+## Roadmap
+
+These are the planned updates of the project.
+
+- Nginx server
+- PayPal API
+- Google logn
+
+## Support
+
+If you like this project, please consider supporting the development.
+
+[![ko-fi](https://i.ibb.co/pvbX9W7/kofi21.png)](https://ko-fi.com/Z8Z7XSML)
+
+Thank you!
 
 ## Installation
 
