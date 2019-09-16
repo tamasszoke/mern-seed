@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
+import styles from './profileModify.module.scss'
+import { connect } from 'react-redux'
+import { setUser } from '../../actions/connectionActions'
 import {
   Paper,
   Typography,
   Button,
   Grid,
-  MenuItem
+  MenuItem,
+  CircularProgress
 } from '@material-ui/core'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import styles from './profileModify.module.scss'
-import { connect } from 'react-redux'
-import { blue, green } from '@material-ui/core/colors'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator'
-import { setUser } from '../../actions/connectionActions'
 import axios from 'axios'
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: green
-  },
-  typography: {
-    useNextVariants: true
-  }
-})
 
 class Profile extends Component {
   constructor(props) {
@@ -85,145 +73,145 @@ class Profile extends Component {
     }
   }
 
-  handleChange = (name) => (event) => {
+  handleChange = (event) => {
+    const name = event.target.name
+    const value = event.target.value
     this.setState({
-      [name]: event.target.value,
+      [name]: value
     })
   }
 
   render() {
     const { loading } = this.state
     return (
-      <MuiThemeProvider theme={theme}>
-        <div className={ styles.profileModify }>
-          <Grid item xs={ 12 } sm={ 6 } md={ 4 }>
-            <Paper>
-              <Typography className={ styles.title } component="h1" variant="h5">
-                Modify profile
-              </Typography>
-              <ValidatorForm
-                ref="form"
-                onSubmit={ this.saveProfile }
-                // onError={ errors => console.log(errors) }
-                className={ styles.content }
+      <div className={ styles.profileModify }>
+        <Grid item xs={ 12 } sm={ 6 } md={ 4 }>
+          <Paper>
+            <Typography className={ styles.title } component="h1" variant="h5">
+              Modify profile
+            </Typography>
+            <ValidatorForm
+              ref="form"
+              onSubmit={ this.saveProfile }
+              // onError={ errors => console.log(errors) }
+              className={ styles.content }
+            >
+              <TextValidator
+                label="Username"
+                onChange={ this.handleChange }
+                name="username"
+                value={ this.state.username || '' }
+                validators={[
+                  'required',
+                  'minStringLength:5',
+                  'maxStringLength:100'
+                ]}
+                errorMessages={[
+                  'this field is required',
+                  'min 5 characters',
+                  'max 100 characters'
+                ]}
+                margin="normal"
+                fullWidth
+              />
+              <TextValidator
+                label="Name"
+                onChange={ this.handleChange }
+                name="name"
+                value={ this.state.name || '' }
+                validators={[
+                  'required',
+                  'minStringLength:5',
+                  'maxStringLength:100'
+                ]}
+                errorMessages={[
+                  'this field is required',
+                  'min 5 characters',
+                  'max 100 characters'
+                ]}
+                margin="normal"
+                fullWidth
+              />
+              <SelectValidator
+                label="Age"
+                onChange={ this.handleChange }
+                name="age"
+                value={ this.state.age || '' }
+                validators={[
+                  'required',
+                  'minStringLength:3',
+                  'maxStringLength:5'
+                ]}
+                errorMessages={[
+                  'this field is required',
+                  'min 3 characters',
+                  'max 5 characters'
+                ]}
+                margin="normal"
+                fullWidth
               >
-                <TextValidator
-                  label="Username"
-                  onChange={ this.handleChange('username') }
-                  name="username"
-                  value={ this.state.username }
-                  validators={[
-                    'required',
-                    'minStringLength:5',
-                    'maxStringLength:100'
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                    'min 5 characters',
-                    'max 100 characters'
-                  ]}
-                  margin="normal"
+                <MenuItem key="0" value="10-20">
+                  -20
+                </MenuItem>
+                <MenuItem key="1" value="21-30">
+                  21-30
+                </MenuItem>
+                <MenuItem key="2" value="31-40">
+                  31-40
+                </MenuItem>
+                <MenuItem key="3" value="41-50">
+                  41-50
+                </MenuItem>
+                <MenuItem key="4" value="51-60">
+                  51-60
+                </MenuItem>
+                <MenuItem key="5" value="60+">
+                  60+
+                </MenuItem>
+              </SelectValidator>
+              <TextValidator
+                label="Location"
+                onChange={ this.handleChange }
+                name="location"
+                value={ this.state.location || '' }
+                validators={[
+                  'required',
+                  'minStringLength:3',
+                  'maxStringLength:100'
+                ]}
+                errorMessages={[
+                  'this field is required',
+                  'min 3 characters',
+                  'max 100 characters'
+                ]}
+                margin="normal"
+                fullWidth
+              />
+              {
+                loading ?
+                <Button
+                  className={ this.button }
+                  variant="contained"
+                  color="primary"
                   fullWidth
-                />
-                <TextValidator
-                  label="Name"
-                  onChange={ this.handleChange('name') }
-                  name="name"
-                  value={ this.state.name }
-                  validators={[
-                    'required',
-                    'minStringLength:5',
-                    'maxStringLength:100'
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                    'min 5 characters',
-                    'max 100 characters'
-                  ]}
-                  margin="normal"
-                  fullWidth
-                />
-                <SelectValidator
-                  label="Age"
-                  onChange={ this.handleChange('age') }
-                  name="age"
-                  value={ this.state.age }
-                  validators={[
-                    'required',
-                    'minStringLength:3',
-                    'maxStringLength:5'
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                    'min 3 characters',
-                    'max 5 characters'
-                  ]}
-                  margin="normal"
+                  disabled
+                >
+                  <CircularProgress color="primary" size={ 24 } />
+                </Button> :
+                <Button
+                  type="submit"
+                  className={ this.button }
+                  variant="contained"
+                  color="primary"
                   fullWidth
                 >
-                  <MenuItem key="0" value="10-20">
-                    -20
-                  </MenuItem>
-                  <MenuItem key="1" value="21-30">
-                    21-30
-                  </MenuItem>
-                  <MenuItem key="2" value="31-40">
-                    31-40
-                  </MenuItem>
-                  <MenuItem key="3" value="41-50">
-                    41-50
-                  </MenuItem>
-                  <MenuItem key="4" value="51-60">
-                    51-60
-                  </MenuItem>
-                  <MenuItem key="5" value="60+">
-                    60+
-                  </MenuItem>
-                </SelectValidator>
-                <TextValidator
-                  label="Location"
-                  onChange={ this.handleChange('location') }
-                  name="location"
-                  value={ this.state.location }
-                  validators={[
-                    'required',
-                    'minStringLength:3',
-                    'maxStringLength:100'
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                    'min 3 characters',
-                    'max 100 characters'
-                  ]}
-                  margin="normal"
-                  fullWidth
-                />
-                {
-                  loading ?
-                  <Button
-                    className={ this.button }
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    disabled
-                  >
-                    <CircularProgress color="primary" size={ 24 } />
-                  </Button> :
-                  <Button
-                    type="submit"
-                    className={ this.button }
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                  >
-                    Save
-                  </Button>
-                }
-              </ValidatorForm>
-            </Paper>
-          </Grid>
-        </div>
-      </MuiThemeProvider>
+                  Save
+                </Button>
+              }
+            </ValidatorForm>
+          </Paper>
+        </Grid>
+      </div>
     )
   }
 }

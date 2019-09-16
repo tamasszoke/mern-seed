@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import styles from './profile.module.scss'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
+import { Link } from 'react-router-dom'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Card,
+  CardContent,
+  Typography
+} from '@material-ui/core'
 import axios from 'axios'
 
 class Profile extends Component {
@@ -59,12 +64,43 @@ class Profile extends Component {
   render() {
     return (
       <div className={ styles.profile }>
-        <h1>Profile</h1>
-        <p><b>Username:</b> { this.props.user.username }</p>
-        <p><b>Name:</b> { this.props.user.name }</p>
-        <p><b>Email:</b> { this.props.user.email }</p>
-        <p><b>Age:</b> { this.props.user.age || '-' }</p>
-        <p><b>Location:</b> { this.props.user.location || '-' }</p>
+        <Card className={ styles.card }>
+          <CardContent>
+            <Typography variant="h5" component="h2" gutterBottom>
+              Profile
+            </Typography>
+            <Typography color="textSecondary">
+              Username
+            </Typography>
+            <Typography component="p" gutterBottom>
+              { this.props.user.username }
+            </Typography>
+            <Typography color="textSecondary">
+              Name
+            </Typography>
+            <Typography component="p" gutterBottom>
+              { this.props.user.name }
+            </Typography>
+            <Typography color="textSecondary">
+              Email
+            </Typography>
+            <Typography component="p" gutterBottom>
+              { this.props.user.email }
+            </Typography>
+            <Typography color="textSecondary">
+              Age
+            </Typography>
+            <Typography component="p" gutterBottom>
+              { this.props.user.age }
+            </Typography>
+            <Typography color="textSecondary">
+              Location
+            </Typography>
+            <Typography component="p" gutterBottom>
+              { this.props.user.location }
+            </Typography>
+          </CardContent>
+        </Card>
         <Button
           onClick={ this.removeDialogClick }
           className={ styles.button }

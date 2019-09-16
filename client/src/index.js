@@ -19,6 +19,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 let store = createStore(persistedReducer)
 let persistor = persistStore(store)
 
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>

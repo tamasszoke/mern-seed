@@ -1,20 +1,8 @@
 import React, { Component } from 'react'
 import styles from './activationHash.module.scss'
-import axios from 'axios'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { blue, green } from '@material-ui/core/colors'
 import { connect } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress'
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: green
-  },
-  typography: {
-    useNextVariants: true
-  }
-})
+import { CircularProgress } from '@material-ui/core'
+import axios from 'axios'
 
 class Activation extends Component {
   constructor(props) {
@@ -65,18 +53,16 @@ class Activation extends Component {
     const { loading } = this.state
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <div className={ styles.activationHash }>
-        {
-          loading ?
-          <div>
-            <h2>Activating account...</h2>
-            <CircularProgress className={ styles.loader } />
-          </div> :
-          null
-        }
-        </div>
-      </MuiThemeProvider>
+      <div className={ styles.activationHash }>
+      {
+        loading ?
+        <div>
+          <h2>Activating account...</h2>
+          <CircularProgress className={ styles.loader } />
+        </div> :
+        null
+      }
+      </div>
     )
   }
 }
