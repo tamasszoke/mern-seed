@@ -36,7 +36,9 @@ const test = {
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,
   clientStaticFolder: path.join(basePath, 'client/build/static'),
-  clientBuildFolder: path.join(basePath, 'client/build')
+  clientBuildFolder: path.join(basePath, 'client/build'),
+  paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
 }
 
 /**
@@ -58,7 +60,9 @@ const development = {
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,
   clientStaticFolder: path.join(basePath, 'client/build/static'),
-  clientBuildFolder: path.join(basePath, 'client/build')
+  clientBuildFolder: path.join(basePath, 'client/build'),
+  paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
 }
 
 /**
@@ -80,7 +84,9 @@ const production = {
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: `mongodb://${process.env.DB_USER}:${encodeURIComponent(process.env.DB_PASS)}@${process.env.DB_HOST}`,
   clientStaticFolder: path.join(basePath, 'client/static'),
-  clientBuildFolder: path.join(basePath, 'client')
+  clientBuildFolder: path.join(basePath, 'client'),
+  paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
 }
 
 const config = {

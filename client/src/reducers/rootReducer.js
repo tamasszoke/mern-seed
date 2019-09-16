@@ -1,7 +1,8 @@
 const initState = {
   user: null,
   authenticated: false,
-  notification: null
+  notification: null,
+  paypal: null
 }
 
 const rootReducer = (state = initState, action) => {
@@ -25,6 +26,11 @@ const rootReducer = (state = initState, action) => {
       return {
         ...state,
         user: action.user
+      }
+    case 'setPaypal':
+      return {
+        ...state,
+        paypal: action.paypal
       }
     default:
       return state

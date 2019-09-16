@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import {
-  AppBar,
-  Toolbar
-} from '@material-ui/core'
 import styles from './navigation.module.scss'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { AppBar, Toolbar } from '@material-ui/core'
 
 class Navigation extends Component {
   render() {
@@ -13,19 +10,21 @@ class Navigation extends Component {
       <div className={styles.root}>
         <AppBar position="static">
           <Toolbar>
-            <Link className={ styles.link } to="/">Home</Link>
-            {
-              this.props.authenticated ? 
-              <font>
-                <Link className={ styles.link } to="/profile">Profile</Link>
-                <Link className={ styles.link } to="/logout">Sign out</Link>
-              </font> :
-              <font>
-                <Link className={ styles.link } to="/login">Login</Link>
-                <Link className={ styles.link } to="/recovery">Recovery</Link>
-                <Link className={ styles.link } to="/registration">Registration</Link>
-              </font>
-            }
+              <Link className={ styles.link } to="/">Home</Link>
+              {
+                this.props.authenticated ? 
+                <font>
+                  <Link className={ styles.link } to="/profile">Profile</Link>
+                  <Link className={ styles.link } to="/paypal">Paypal</Link>
+                  <Link className={ styles.link } to="/logout">Sign out</Link>
+                </font> :
+                <font>
+                  <Link className={ styles.link } to="/login">Login</Link>
+                  <Link className={ styles.link } to="/recovery">Recovery</Link>
+                  <Link className={ styles.link } to="/registration">Registration</Link>
+                  <Link className={ styles.link } to="/paypal">Paypal</Link>
+                </font>
+              }
           </Toolbar>
         </AppBar>
       </div>

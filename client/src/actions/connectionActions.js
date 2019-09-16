@@ -25,3 +25,10 @@ export const setUser = (user) => {
     user
   }
 }
+
+export const setPaypal = (paypal) => {
+  return {
+    type: 'setPaypal',
+    paypal
+  }
+}

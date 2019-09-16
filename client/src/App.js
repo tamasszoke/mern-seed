@@ -11,8 +11,9 @@ import RecoveryHash from './components/RecoveryHash/RecoveryHash'
 import Error from './components/Error/Error'
 import Navigation from './components/Navigation/Navigation'
 import Profile from './components/Profile/Profile'
+import Paypal from './components/Paypal/Paypal'
 import { connect } from 'react-redux'
-import { setUrl, setAuth, setNotifications } from './actions/connectionActions'
+import { setUrl, setAuth, setNotifications, setPaypal } from './actions/connectionActions'
 import ReactNotification from "react-notifications-component"
 import "react-notifications-component/dist/theme.css"
 import "animate.css"
@@ -40,8 +41,12 @@ class App extends Component {
     this.notification = this.notification.bind(this)
     this.notificationDOMRef = React.createRef()
     this.url = `https://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}`
+    this.paypal = {
+      clientId: ''
+    }
     this.props.setNotifications(this.notification)
     this.props.setUrl(this.url)
+    this.props.setPaypal(this.paypal)
     axios.defaults.withCredentials = true
   }
 
@@ -78,7 +83,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className={ styles.app }>
-          <ReactNotification ref={this.notificationDOMRef} />
+          <ReactNotification ref={ this.notificationDOMRef } />
           <Navigation />
           <Switch>
             <Route path="/" component={ Home } exact />
@@ -88,6 +93,7 @@ class App extends Component {
             <Route path="/activation/:hash" component={ ActivationHash } exact />
             <Route path="/recovery" component={ Recovery } exact />
             <Route path="/recovery/:hash" component={ RecoveryHash }/>
+            <Route path="/paypal" component={ Paypal } exact />
             <PrivateRoute path='/profile' component={ Profile } authenticated={ this.props.authenticated } exact/>
             <PrivateRoute path='/profile/modify' component={ ProfileModify } authenticated={ this.props.authenticated } exact/>
             <Route component={ Error } />
@@ -108,7 +114,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setUrl: url => { dispatch(setUrl(url)) },
     setAuth: authenticated => { dispatch(setAuth(authenticated)) },
-    setNotifications: notifications => { dispatch(setNotifications(notifications)) }
+    setNotifications: notifications => { dispatch(setNotifications(notifications)) },
+    setPaypal: paypal => { dispatch(setPaypal(paypal)) }
   }
 }
 
