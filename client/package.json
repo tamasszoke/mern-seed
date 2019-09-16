@@ -1,5 +1,5 @@
 {
-  "name": "node-react-client",
+  "name": "mern-boilerplate-client",
   "version": "0.1.0",
   "private": true,
   "homepage": "/build",
@@ -8,9 +8,10 @@
     "@material-ui/icons": "^3.0.2",
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-github-btn": "^1.0.6",
     "react-material-ui-form-validator": "^2.0.3",
     "react-notifications-component": "^1.0.1",
     "react-redux": "^6.0.0",

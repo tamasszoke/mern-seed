@@ -2,7 +2,8 @@ const initState = {
   user: null,
   authenticated: false,
   notification: null,
-  paypal: null
+  paypal: null,
+  theme: 'light'
 }
 
 const rootReducer = (state = initState, action) => {
@@ -31,6 +32,11 @@ const rootReducer = (state = initState, action) => {
       return {
         ...state,
         paypal: action.paypal
+      }
+    case 'setTheme':
+      return {
+        ...state,
+        theme: action.theme
       }
     default:
       return state

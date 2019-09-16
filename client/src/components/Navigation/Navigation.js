@@ -1,30 +1,46 @@
 import React, { Component } from 'react'
 import styles from './navigation.module.scss'
 import { connect } from 'react-redux'
+import { setTheme } from '../../actions/connectionActions'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton } from '@material-ui/core'
 
 class Navigation extends Component {
+  switchTheme = () => {
+    this.props.theme === 'light' ? this.props.setTheme('dark') : this.props.setTheme('light') 
+  }
+
   render() {
+    const linkColor = this.props.theme === 'light' ? styles.black : styles.white
+    const linkStyle = [styles.link, linkColor].join(' ')
+
     return (
-      <div className={styles.root}>
-        <AppBar position="static">
+      <div className={ styles.nav }>
+        <AppBar position="static" color="default">
           <Toolbar>
-              <Link className={ styles.link } to="/">Home</Link>
+            <div className={ styles.flexGrow }>
+              <Link className={ linkStyle } to="/">Home</Link>
               {
                 this.props.authenticated ? 
                 <font>
-                  <Link className={ styles.link } to="/profile">Profile</Link>
-                  <Link className={ styles.link } to="/paypal">Paypal</Link>
-                  <Link className={ styles.link } to="/logout">Sign out</Link>
+                  <Link className={ linkStyle } to="/profile">Profile</Link>
+                  <Link className={ linkStyle } to="/paypal">Paypal</Link>
+                  <Link className={ linkStyle } to="/logout">Sign out</Link>
                 </font> :
                 <font>
-                  <Link className={ styles.link } to="/login">Login</Link>
-                  <Link className={ styles.link } to="/recovery">Recovery</Link>
-                  <Link className={ styles.link } to="/registration">Registration</Link>
-                  <Link className={ styles.link } to="/paypal">Paypal</Link>
+                  <Link className={ linkStyle } to="/login">Login</Link>
+                  <Link className={ linkStyle } to="/recovery">Recovery</Link>
+                  <Link className={ linkStyle } to="/registration">Registration</Link>
+                  <Link className={ linkStyle } to="/paypal">Paypal</Link>
                 </font>
               }
+            </div>
+            <IconButton
+              className={ styles.theme }
+              onClick={ this.switchTheme }
+            >
+              <i className="material-icons">invert_colors</i>
+            </IconButton>
           </Toolbar>
         </AppBar>
       </div>
@@ -34,8 +50,15 @@ class Navigation extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.authenticated
+    authenticated: state.authenticated,
+    theme: state.theme
   }
 }
 
-export default connect(mapStateToProps)(Navigation)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setTheme: theme => { dispatch(setTheme(theme)) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

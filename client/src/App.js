@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import styles from './app.module.scss'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login'
@@ -24,6 +25,7 @@ import {// eslint-disable-next-line
   send// eslint-disable-next-line
 } from './components/SocketIo/Socket'
 import axios from 'axios'
+import { CssBaseline } from '@material-ui/core'
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
   <Route { ...rest }
@@ -81,24 +83,27 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className={ styles.app }>
-          <ReactNotification ref={ this.notificationDOMRef } />
-          <Navigation />
-          <Switch>
-            <Route path="/" component={ Home } exact />
-            <Route path="/login" component={ Login } exact />
-            <Route path="/logout" component={ Logout } exact />
-            <Route path="/registration" component={ Registration } exact />
-            <Route path="/activation/:hash" component={ ActivationHash } exact />
-            <Route path="/recovery" component={ Recovery } exact />
-            <Route path="/recovery/:hash" component={ RecoveryHash }/>
-            <Route path="/paypal" component={ Paypal } exact />
-            <PrivateRoute path='/profile' component={ Profile } authenticated={ this.props.authenticated } exact/>
-            <PrivateRoute path='/profile/modify' component={ ProfileModify } authenticated={ this.props.authenticated } exact/>
-            <Route component={ Error } />
-          </Switch>
-        </div>
+        <BrowserRouter>
+          <MuiThemeProvider theme={ createMuiTheme({palette: { type: this.props.theme }}) }>
+          <CssBaseline />
+          <div className={ styles.app }>
+            <ReactNotification ref={ this.notificationDOMRef } />
+            <Navigation />
+            <Switch>
+              <Route path="/" component={ Home } exact />
+              <Route path="/login" component={ Login } exact />
+              <Route path="/logout" component={ Logout } exact />
+              <Route path="/registration" component={ Registration } exact />
+              <Route path="/activation/:hash" component={ ActivationHash } exact />
+              <Route path="/recovery" component={ Recovery } exact />
+              <Route path="/recovery/:hash" component={ RecoveryHash }/>
+              <Route path="/paypal" component={ Paypal } exact />
+              <PrivateRoute path='/profile' component={ Profile } authenticated={ this.props.authenticated } exact/>
+              <PrivateRoute path='/profile/modify' component={ ProfileModify } authenticated={ this.props.authenticated } exact/>
+              <Route component={ Error } />
+            </Switch>
+          </div>
+        </MuiThemeProvider>
       </BrowserRouter>
     )
   }
@@ -106,7 +111,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.authenticated
+    authenticated: state.authenticated,
+    theme: state.theme
   }
 }
 

@@ -2,6 +2,21 @@
   margin-left: 20px;
   margin-right: 20px;
   text-decoration: none;
-  color: white;
   cursor: pointer;
+}
+
+.white{
+  color: white;
+}
+
+.black{
+  color: black;
+}
+
+.flexGrow{
+  flex-grow: 1;
+}
+
+.theme{
+  top: -10px;
 }

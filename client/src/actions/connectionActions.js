@@ -32,3 +32,10 @@ export const setPaypal = (paypal) => {
     paypal
   }
 }
+
+export const setTheme = (theme) => {
+  return {
+    type: 'setTheme',
+    theme
+  }
+}
