@@ -17,9 +17,6 @@ class Logout extends Component {
   }
 
   logout = async () => {
-    this.setState({
-      loading: true
-    })
     const response = await axios.post(`${this.props.url}/api/user/logout`)
     if (response.data.success) {
       this.props.setAuth(false)
