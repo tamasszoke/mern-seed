@@ -1,5 +1,6 @@
 # MERN Boilerplate
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
 
 Boilerplate for MERN stack development, ready for production.
@@ -10,9 +11,11 @@ Boilerplate for MERN stack development, ready for production.
 + Using [HTTP/2](https://http2.github.io/)
 + [Redis](https://www.npmjs.com/package/connect-redis) for sessions
 + Folder by Feature structure
-+ Minimal [Material UI](https://material-ui.com/) design
++ Minimal [Material UI v4](https://material-ui.com/) design
++ Built-in dark theme switch
 + Built-in React routing, [Redux](https://redux.js.org/)
 + Built-in local authentication with [Passport](http://www.passportjs.org/)
++ Built-in PayPal payment (smart buttons)
 + Built-in [Socket.IO](https://socket.io/) connection
 + [EJS](https://ejs.co/) for rendering
 + Handling database with [Mongoose](https://mongoosejs.com/)
@@ -28,8 +31,10 @@ Boilerplate for MERN stack development, ready for production.
 These are the planned updates of the project.
 
 - Nginx server
-- PayPal API
-- Google logn
+- ~~PayPal payment~~
+- Google login
+- ~~Dark theme switch~~
+- ~~Material UI v4~~
 
 ## Support
 
@@ -92,6 +97,8 @@ Example (include all of these):
     DB_PASS=[MONGOLAB_DB_PASSWORD]
     EMAIL_ADDRESS=[GMAIL_ADDRESS]
     EMAIL_PASS=[GMAIL_PASSWORD]
+    PAYPAL_CLIENT_ID=[PAYPAL_ID]
+    PAYPAL_CLIENT_SECRET=[PAYPAL_SECRET]
 
 Located at `server/.env/development.config.env`.
 
@@ -108,6 +115,12 @@ Tip: create them online for free at [ZeroSSL](https://zerossl.com/)
 Create MongoDB with a collection called `users`.
 
 I've used the free service provided by [mLab](https://mlab.com/).
+
+**Set up PayPal payment**
+
+1. Create an account at [PayPal Developer](https://developer.paypal.com/`).
+2. Create an app, copy the client `ID` and `Secret` to the `.env` files.
+3. Create a sandbox account, so you can test the payment.
 
 ## Usage
 
