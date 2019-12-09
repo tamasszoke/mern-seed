@@ -2,8 +2,11 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/tamasszoke/mern-boilerplate)](https://github.com/tamasszoke/mern-boilerplate/stargazers)
 
-Boilerplate for MERN stack development, ready for production.
+Boilerplate for MERN stack development, prepared for production.
+
+[Support the project](https://ko-fi.com/Z8Z7XSML)
 
 **Highlights**
 
@@ -15,7 +18,7 @@ Boilerplate for MERN stack development, ready for production.
 + Built-in dark theme switch
 + Built-in React routing, [Redux](https://redux.js.org/)
 + Built-in local authentication with [Passport](http://www.passportjs.org/)
-+ Built-in PayPal payment (smart buttons)
++ Built-in [PayPal](https://developer.paypal.com/docs/checkout/) payment (smart buttons)
 + Built-in [Socket.IO](https://socket.io/) connection
 + [EJS](https://ejs.co/) for rendering
 + Handling database with [Mongoose](https://mongoosejs.com/)
@@ -36,20 +39,17 @@ These are the planned updates of the project.
 - ~~Dark theme switch~~
 - ~~Material UI v4~~
 
-## Support
-
-If you like this project, please consider supporting the development.
-
-[![ko-fi](https://i.ibb.co/pvbX9W7/kofi21.png)](https://ko-fi.com/Z8Z7XSML)
-
-Thank you!
-
 ## Installation
 
-1. Install dependencies
-2. Set env variables
-3. Add SSL files
-4. Create database
+1. Clone the repository
+2. Install dependencies
+3. Set env variables
+4. Add SSL files
+5. Create database
+
+**Clone the repository**
+
+`git clone https://github.com/tamasszoke/mern-boilerplate.git`
 
 **Install dependencies**
 
@@ -212,6 +212,84 @@ Stops the application instances in PM2.
 **npm run delete**
 
 Removes the application instances from PM2.
+
+## Dependency list
+
+### Root
+
+| Name        | Version |
+| :---------- |:--------|
+| concurrently  | ^4.1.0   |
+
+### Client
+
+| Name        | Version |
+| :---------- |:--------|
+| @material-ui/core| ^4.4.2 |
+| @material-ui/icons| ^4.4.1 |
+| @material-ui/styles| ^4.4.1 |
+| animate.css| ^3.7.2 |
+| axios| ^0.19.0 |
+| node-sass| ^4.12.0 |
+| react| ^16.9.0 |
+| react-dom| ^16.9.0 |
+| react-github-btn| ^1.0.6 |
+| react-material-ui-form-validator| ^2.0.9 |
+| react-notifications-component| ^2.0.7 |
+| react-redux| ^7.1.1 |
+| react-router-dom| ^5.0.1 |
+| react-scripts| 3.1.1 |
+| redux| ^4.0.4 |
+| redux-persist| ^6.0.0 |
+| socket.io-client| ^2.2.0|
+
+### Server
+
+| Name        | Version |
+| :---------- |:--------|
+| @paypal/checkout-server-sdk| ^1.0.1 |
+| body-parser| ^1.17.1 |
+| connect-redis| ^3.4.0 |
+| cookie-parser| ^1.4.3 |
+| cors| ^2.8.5 |
+| dotenv| ^6.2.0 |
+| ejs| ^2.5.6 |
+| express| ^4.15.2 |
+| express-rate-limit| ^3.4.0 |
+| express-session| ^1.15.6 |
+| helmet| ^3.12.1 |
+| mongoose| 5.1.3 |
+| nodemailer| ^4.6.5 |
+| nodemailer-smtp-transport| ^2.7.4 |
+| passport| ^0.4.0 |
+| passport-local| ^1.0.0 |
+| path| ^0.12.7 |
+| rate-limit-redis| ^1.6.0 |
+| request| ^2.81.0 |
+| socket.io| ^2.1.1 |
+| spdy| ^4.0.0 |
+| validator| ^10.10.0 |
+| webpack-node-externals| ^1.7.2 |
+| winston| 3.0.0-rc6 |
+
+### Server dev
+
+| Name        | Version |
+| :---------- |:--------|
+| chai | 4.1.2 |
+| copy-webpack-plugin | ^5.0.1 |
+| eslint | ^5.12.1 |
+| eslint-config-standard | ^12.0.0 |
+| eslint-plugin-import | ^2.14.0 |
+| eslint-plugin-node | ^8.0.1 |
+| eslint-plugin-promise | ^4.0.1 |
+| eslint-plugin-security | ^1.4.0 |
+| eslint-plugin-standard | ^4.0.0 |
+| mocha | 5.2.0 |
+| nodemon | ^1.18.9 |
+| nyc | ^13.2.0 |
+| webpack | ^4.19.1 |
+| webpack-cli | ^3.2.1 |
 
 ## License
 
