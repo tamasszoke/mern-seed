@@ -15,8 +15,10 @@ import Profile from './components/Profile/Profile'
 import Paypal from './components/Paypal/Paypal'
 import { connect } from 'react-redux'
 import { setUrl, setAuth, setNotifications, setPaypal } from './actions/connectionActions'
-import ReactNotification from "react-notifications-component"
-import "react-notifications-component/dist/theme.css"
+// import ReactNotification from "react-notifications-component"
+// import "react-notifications-component/dist/theme.css"
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import "animate.css"
 import ProfileModify from './components/ProfileModify/ProfileModify'
 // eslint-disable-next-line
@@ -26,6 +28,11 @@ import {// eslint-disable-next-line
 } from './components/SocketIo/Socket'
 import axios from 'axios'
 import { CssBaseline } from '@material-ui/core'
+
+toast.configure({
+  autoClose: 5000,
+  draggable: false
+})
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
   <Route { ...rest }
@@ -40,8 +47,6 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
 class App extends Component {
   constructor(props) {
     super(props)
-    this.notification = this.notification.bind(this)
-    this.notificationDOMRef = React.createRef()
     this.url = `https://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}`
     this.paypal = {
       clientId: ''
@@ -67,18 +72,11 @@ class App extends Component {
   }
 
   notification(options) {
-    const { type, title, message } = options
-    this.notificationDOMRef.current.addNotification({
-      title: title,
-      message: message,
-      type: type,
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animated", "bounceInRight"],
-      animationOut: ["animated", "bounceOutRight"],
-      dismiss: { duration: 5000 },
-      dismissable: { click: true }
-    })
+    let { type, title, message } = options
+    if (type === 'danger') {
+      type = 'warning'
+    }
+    toast[type](<div><b>{title}</b><br/>{message}</div>)
   }
 
   render() {
@@ -87,7 +85,6 @@ class App extends Component {
           <MuiThemeProvider theme={ createMuiTheme({palette: { type: this.props.theme }}) }>
           <CssBaseline />
           <div className={ styles.app }>
-            <ReactNotification ref={ this.notificationDOMRef } />
             <Navigation />
             <Switch>
               <Route path="/" component={ Home } exact />
