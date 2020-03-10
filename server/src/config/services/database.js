@@ -8,7 +8,11 @@ const mongoose = require('mongoose')
  * Connecting to database
  */
 const init = () => {
-  mongoose.connect(config.mongoUrl)
+  mongoose.connect(config.mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   const db = mongoose.connection
   error(db)
   open(db)
