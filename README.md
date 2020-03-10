@@ -2,7 +2,6 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/tamasszoke/mern-boilerplate)](https://github.com/tamasszoke/mern-boilerplate/stargazers)
 
 Boilerplate for MERN stack development, prepared for production.
 
