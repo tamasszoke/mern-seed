@@ -35,7 +35,7 @@ class App extends Component {
     this.setState({
       loading: true
     })
-    const response = await axios.put(`${this.props.url}/api/user/registration`, userdata)
+    const response = await axios.put(`${this.props.url}/api/auth/registration`, userdata)
     this.setState({
       loading: false
     })

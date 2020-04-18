@@ -32,7 +32,7 @@ class RecoveryHash extends Component {
     this.setState({
       loading: true
     })
-    const response = await axios.post(`${this.props.url}/api/user/recovery`, userdata)
+    const response = await axios.post(`${this.props.url}/api/auth/recovery`, userdata)
     this.setState({
       loading: false
     })

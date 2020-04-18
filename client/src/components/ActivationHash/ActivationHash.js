@@ -22,7 +22,7 @@ class Activation extends Component {
     this.setState({
       loading: true
     })
-    const response = await axios.post(`${this.props.url}/api/user/activation`, userdata)
+    const response = await axios.post(`${this.props.url}/api/auth/activation`, userdata)
     this.setState({
       loading: false
     })

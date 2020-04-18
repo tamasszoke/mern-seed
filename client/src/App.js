@@ -14,7 +14,7 @@ import Navigation from './components/Navigation/Navigation'
 import Profile from './components/Profile/Profile'
 import Paypal from './components/Paypal/Paypal'
 import { connect } from 'react-redux'
-import { setUrl, setAuth, setNotifications, setPaypal } from './actions/connectionActions'
+import { setUrl, setAuth, setUser, setNotifications, setPaypal } from './actions/connectionActions'
 // import ReactNotification from "react-notifications-component"
 // import "react-notifications-component/dist/theme.css"
 import { toast } from 'react-toastify'
@@ -57,7 +57,7 @@ class App extends Component {
     axios.defaults.withCredentials = true
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     axios.interceptors.response.use(undefined, (error) => {
       if(error.response.status === 401) {
         this.props.setAuth(false)
@@ -69,6 +69,9 @@ class App extends Component {
         return Promise.reject(error)
       }
     })
+    const authenticated = await axios.post(`${this.url}/api/auth/check`)
+    this.props.setAuth(authenticated.data.success)
+    this.props.setUser(authenticated.data.user)
   }
 
   notification(options) {
@@ -117,6 +120,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setUrl: url => { dispatch(setUrl(url)) },
     setAuth: authenticated => { dispatch(setAuth(authenticated)) },
+    setUser: (user) => { dispatch(setUser(user)) },
     setNotifications: notifications => { dispatch(setNotifications(notifications)) },
     setPaypal: paypal => { dispatch(setPaypal(paypal)) }
   }
