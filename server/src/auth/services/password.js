@@ -1,6 +1,6 @@
 'use strict'
 
-const User = require('../user.model')
+const User = require('../../user/user.model')
 const crypto = require('crypto')
 
 /**
@@ -29,7 +29,7 @@ const createHash = (password, salt) => {
  * @function
  * @param {string} password
  */
-const createPassword = (password) => {
+const create = (password) => {
   if (!password) {
     return false
   }
@@ -48,7 +48,7 @@ const createPassword = (password) => {
  * @param {string} password
  * @param {callback} callback
  */
-const checkPassword = (email, password, callback) => {
+const check = (email, password, callback) => {
   if (!email || !password) {
     return callback(null)
   }
@@ -68,6 +68,6 @@ const checkPassword = (email, password, callback) => {
 }
 
 module.exports = {
-  createPassword,
-  checkPassword
+  create,
+  check
 }

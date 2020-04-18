@@ -1,8 +1,8 @@
 'use strict'
 
-const User = require('../user.model')
+const User = require('../../user/user.model')
 const crypto = require('crypto')
-const middleware = require('./middleware')
+const Password = require('./password')
 
 /**
  * Create recovery hash
@@ -38,7 +38,7 @@ const recovery = (data, callback) => {
  */
 const recoveryHash = (data, callback) => {
   const { password, hash } = data
-  const passwordData = middleware.createPassword(password)
+  const passwordData = Password.create(password)
   User.findOneAndUpdate({ recovery: hash },
     {
       $set: {
