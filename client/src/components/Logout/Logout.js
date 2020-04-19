@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './logout.module.scss'
 import { connect } from 'react-redux'
-import { setAuth } from '../../actions/connectionActions'
+import { setAuth, setUser } from '../../actions/connectionActions'
 import { withRouter } from 'react-router'
 import { Typography, CircularProgress } from '@material-ui/core'
 import axios from 'axios'
@@ -20,6 +20,7 @@ class Logout extends Component {
     const response = await axios.post(`${this.props.url}/api/auth/logout`)
     if (response.data.success) {
       this.props.setAuth(false)
+      this.props.setUser(null)
       this.props.history.push('/')
     } else {
       this.setState({
@@ -64,7 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAuth: (authenticated) => { dispatch(setAuth(authenticated)) }
+    setAuth: (authenticated) => { dispatch(setAuth(authenticated)) },
+    setUser: (user) => { dispatch(setUser(user)) }
   }
 }
 
