@@ -3,11 +3,13 @@
 const local = require('./services/local')
 const google = require('./services/google')
 const logout = require('./services/logout')
-const { register, activate } = require('./services/registration')
+const password = require('./services/password')
+const { activate } = require('./services/activate')
 const { recovery, recoveryHash } = require('./services/recovery')
 const mail = require('../common/services/email')
 const { config, show } = require('../config')
 const action = {}
+action.google = {}
 
 /**
  * Check login
@@ -16,11 +18,20 @@ action.check = (req, res) => {
   show.debug('Checking login status...')
   if (req.isAuthenticated()) {
     show.debug('Logged in!')
+    const { user } = req
     const data = {
-      success: true,
-      user: req.user
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      age: user.age,
+      location: user.location,
+      active: user.active
     }
-    res.json(data)
+    res.json({
+      success: true,
+      user: data
+    })
   } else {
     show.debug('Not logged in!')
     const data = {
@@ -44,7 +55,8 @@ action.login = (req, res, next) => {
         name: user.name,
         email: user.email,
         age: user.age,
-        location: user.location
+        location: user.location,
+        active: user.active
       }
       return res.json({
         type: 'login',
@@ -70,26 +82,15 @@ action.login = (req, res, next) => {
 /**
  * Login with Google
  */
-action.googleLogin = (req, res, next) => {
+action.google.login = (req, res, next) => {
   show.debug('Logging in with google...')
-  google.login(req, res, next, (err, user) => {
-    if (!err && user) {
-      show.debug('Login success!')
-      return true
-    } else if (!err && !user) {
-      show.debug('User not found!')
-      return false
-    } else {
-      show.debug('Login error!')
-      return false
-    }
-  })
+  google.login(req, res, next)
 }
 
 /**
  * Login with Google callback
  */
-action.googleCallback = (req, res, next) => {
+action.google.callback = (req, res, next) => {
   show.debug('Login with google callback...')
   google.callback(req, res, next)
 }
@@ -97,9 +98,9 @@ action.googleCallback = (req, res, next) => {
 /**
  * Login with Google cb
  */
-action.googleReady = (req, res) => {
+action.google.ready = (req, res) => {
   show.debug('Login with google ready.')
-  google.ready(req, res)
+  google.ready(config.url, req, res)
 }
 
 /**
@@ -130,13 +131,13 @@ action.logout = (req, res, next) => {
 action.registration = (req, res, next) => {
   show.debug('Registrating...')
   const data = req.body
-  register(data, (err, user) => {
+  local.register(data, (err, user) => {
     if (!err && user) {
       show.debug('Registration success!')
       mail.send({
         to: data.email,
         subject: 'N-R-B | Registration',
-        content: '<h1>Wecome ' + data.name + '!</h1>Successfully registered!<h2><a href="' + config.url + '/activation/' + user.activation + '" target="_new">Activate account</a></h2>'
+        content: '<h1>Welcome ' + data.name + '!</h1>Successfully registered!<h2><a href="' + config.url + '/activation/' + user.activation + '" target="_new">Activate account</a></h2>'
       }, (error, sent) => {
         if (!error && sent) {
           return res.json({
@@ -154,6 +155,39 @@ action.registration = (req, res, next) => {
       show.debug('Registration failed!')
       return res.json({
         type: 'registration',
+        success: false
+      })
+    }
+  })
+}
+
+/**
+ * Registration finish (set password)
+ */
+action.finish = (req, res, next) => {
+  const data = req.body
+  show.debug('Setting password...')
+  password.set(data, (err, user) => {
+    if (!err && user) {
+      show.debug('Password set up success!')
+      const data = {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        location: user.location,
+        active: user.active
+      }
+      return res.json({
+        type: 'finish',
+        success: true,
+        user: data
+      })
+    } else {
+      show.debug('Password set up failed!')
+      return res.json({
+        type: 'finish',
         success: false
       })
     }

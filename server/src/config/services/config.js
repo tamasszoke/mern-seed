@@ -38,7 +38,9 @@ const test = {
   clientStaticFolder: path.join(basePath, 'client/build/static'),
   clientBuildFolder: path.join(basePath, 'client/build'),
   paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
-  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
+  googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
 }
 
 /**
@@ -62,7 +64,9 @@ const development = {
   clientStaticFolder: path.join(basePath, 'client/build/static'),
   clientBuildFolder: path.join(basePath, 'client/build'),
   paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
-  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
+  googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
 }
 
 /**
@@ -86,7 +90,9 @@ const production = {
   clientStaticFolder: path.join(basePath, 'client/static'),
   clientBuildFolder: path.join(basePath, 'client'),
   paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
-  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || ''
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
+  googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
 }
 
 const config = {

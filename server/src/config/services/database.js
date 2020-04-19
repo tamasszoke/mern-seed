@@ -11,7 +11,8 @@ const init = () => {
   mongoose.connect(config.mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   const db = mongoose.connection
   error(db)

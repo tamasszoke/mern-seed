@@ -67,7 +67,38 @@ const check = (email, password, callback) => {
   })
 }
 
+/**
+ * Set a password
+ * @function
+ * @param {object} data
+ * @param {callback} callback
+ */
+const set = (data, callback) => {
+  const { password, email } = data
+  const passwordData = create(password)
+  User.findOneAndUpdate({ email },
+    {
+      $set: {
+        salt: passwordData.salt,
+        password: passwordData.password,
+        active: true
+      }
+    },
+    {
+      new: true
+    },
+    (err, user) => {
+      if (!err && user) {
+        return callback(null, user)
+      } else {
+        return callback(err)
+      }
+    }
+  )
+}
+
 module.exports = {
   create,
-  check
+  check,
+  set
 }

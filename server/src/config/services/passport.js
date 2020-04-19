@@ -1,9 +1,13 @@
 'use strict'
 
+const { googleClientId, googleClientSecret } = require('./config')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const middleware = require('../../user/services/middleware')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
+const Password = require('../../auth/services/password')
+const google = require('../../auth/services/google')
 const User = require('../../user/user.model')
+const show = require('./logging')
 
 /**
  * Find an active user by email and password
@@ -13,7 +17,7 @@ const User = require('../../user/user.model')
  * @param {callback} callback
  */
 const findUser = (email, password, callback) => {
-  middleware.checkPassword(email, password, (err, user) => {
+  Password.check(email, password, (err, user) => {
     if (!err && user) {
       return callback(null, user)
     } else {
@@ -53,6 +57,41 @@ passport.use(new LocalStrategy({
       return done(null, false)
     }
     return done(null, user)
+  })
+}))
+
+/**
+ * Passport googlestrategy
+ */
+passport.use(new GoogleStrategy({
+  clientID: googleClientId,
+  clientSecret: googleClientSecret,
+  callbackURL: `https://localhost:3001/api/auth/login/google/callback`
+},
+(accessToken, refreshToken, profile, done) => {
+  process.nextTick(() => {
+    const email = profile.emails[0].value
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        return done(err, null)
+      } else if (!user || user === undefined || user.length === 0) {
+        show.debug('User not found, creating profile...')
+        google.register({
+          email,
+          username: `${profile.name.givenName.toLowerCase()}${profile.name.familyName.toLowerCase()}`,
+          name: `${profile.displayName}`
+        }, (err, user) => {
+          if (!err && user) {
+            return done(null, user)
+          } else {
+            return done(err, null)
+          }
+        })
+      } else {
+        show.debug('User found...')
+        return done(null, user)
+      }
+    })
   })
 }))
 

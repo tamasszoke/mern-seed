@@ -13,6 +13,11 @@ const userSchema = new Schema({
     minlength: 5,
     maxlength: 1000
   },
+  googleId: {
+    type: String,
+    minlength: 5,
+    maxlength: 1000
+  },
   username: {
     type: String,
     required: true,
@@ -34,13 +39,11 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 5,
     maxlength: 1000
   },
   salt: {
     type: String,
-    required: true,
     minlength: 5,
     maxlength: 20
   },
