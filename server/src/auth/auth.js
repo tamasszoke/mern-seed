@@ -2,6 +2,7 @@
 
 const local = require('./services/local')
 const google = require('./services/google')
+const github = require('./services/github')
 const logout = require('./services/logout')
 const password = require('./services/password')
 const { activate } = require('./services/activate')
@@ -10,6 +11,7 @@ const mail = require('../common/services/email')
 const { config, show } = require('../config')
 const action = {}
 action.google = {}
+action.github = {}
 
 /**
  * Check login
@@ -101,6 +103,30 @@ action.google.callback = (req, res, next) => {
 action.google.ready = (req, res) => {
   show.debug('Login with google ready.')
   google.ready(config.url, req, res)
+}
+
+/**
+ * Login with Github
+ */
+action.github.login = (req, res, next) => {
+  show.debug('Logging in with github...')
+  github.login(req, res, next)
+}
+
+/**
+ * Login with Github callback
+ */
+action.github.callback = (req, res, next) => {
+  show.debug('Login with github callback...')
+  github.callback(req, res, next)
+}
+
+/**
+ * Login with Github cb
+ */
+action.github.ready = (req, res) => {
+  show.debug('Login with github ready.')
+  github.ready(config.url, req, res)
 }
 
 /**

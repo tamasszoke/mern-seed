@@ -48,6 +48,7 @@
     "nodemailer": "^4.6.5",
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.4.0",
+    "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",

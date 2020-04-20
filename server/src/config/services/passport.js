@@ -1,11 +1,18 @@
 'use strict'
 
-const { googleClientId, googleClientSecret } = require('./config')
+const {
+  googleClientId,
+  googleClientSecret,
+  githubClientId,
+  githubClientSecret
+} = require('./config')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
+const GitHubStrategy = require('passport-github2').Strategy
 const Password = require('../../auth/services/password')
 const google = require('../../auth/services/google')
+const github = require('../../auth/services/github')
 const User = require('../../user/user.model')
 const show = require('./logging')
 
@@ -80,6 +87,42 @@ passport.use(new GoogleStrategy({
           email,
           username: `${profile.name.givenName.toLowerCase()}${profile.name.familyName.toLowerCase()}`,
           name: `${profile.displayName}`
+        }, (err, user) => {
+          if (!err && user) {
+            return done(null, user)
+          } else {
+            return done(err, null)
+          }
+        })
+      } else {
+        show.debug('User found...')
+        return done(null, user)
+      }
+    })
+  })
+}))
+
+/**
+ * Passport githubstrategy
+ */
+passport.use(new GitHubStrategy({
+  clientID: githubClientId,
+  clientSecret: githubClientSecret,
+  callbackURL: `https://localhost:3001/api/auth/login/github/callback`,
+  scope: ['user:email']
+},
+(accessToken, refreshToken, profile, done) => {
+  process.nextTick(() => {
+    const email = profile.emails[0].value
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        return done(err, null)
+      } else if (!user || user === undefined || user.length === 0) {
+        show.debug('User not found, creating profile...')
+        github.register({
+          email,
+          username: profile.username,
+          name: profile.displayName
         }, (err, user) => {
           if (!err && user) {
             return done(null, user)
