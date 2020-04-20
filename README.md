@@ -1,4 +1,4 @@
-# MERN Boilerplate
+-# MERN Boilerplate
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
@@ -100,6 +100,8 @@ Example (include all of these):
     PAYPAL_CLIENT_SECRET=[PAYPAL_SECRET]
     GOOGLE_CLIENT_ID=[GOOGLE_ID]
   	GOOGLE_CLIENT_SECRET=[GOOGLE_SECRET]
+    GITHUB_CLIENT_ID=[GITHUB_ID]
+    GITHUB_CLIENT_SECRET=[GITHUB_SECRET]
 
 Located at `server/.env/development.config.env`.
 
@@ -127,6 +129,12 @@ I've used the free service provided by [mLab](https://mlab.com/).
 
 1. Create an account at [Google Developer Console](https://console.developers.google.com/).
 2. Create an API Console project and client ID. Use Web browser as client type and `https://localhost/api/auth/login/google/callback` as callback url.
+3. Copy the client `ID` and `Secret` to the `.env` files.
+
+**Set up GitHub authentication**
+
+1. Create a GitHub account.
+2. Register a new OAuth application at [GitHub Developer](https://github.com/settings/applications/new).
 3. Copy the client `ID` and `Secret` to the `.env` files.
 
 ## Usage
@@ -269,6 +277,8 @@ Removes the application instances from PM2.
 | nodemailer| ^4.6.5 |
 | nodemailer-smtp-transport| ^2.7.4 |
 | passport| ^0.4.0 |
+| passport-github2| ^0.1.12 |
+| passport-google-oauth20| ^2.0.0 |
 | passport-local| ^1.0.0 |
 | path| ^0.12.7 |
 | rate-limit-redis| ^1.6.0 |
