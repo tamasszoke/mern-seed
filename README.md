@@ -34,7 +34,7 @@ These are the planned updates of the project.
 
 - Nginx server
 - ~~PayPal payment~~
-- Google login
+- ~~Google login~~
 - ~~Dark theme switch~~
 - ~~Material UI v4~~
 
@@ -98,6 +98,8 @@ Example (include all of these):
     EMAIL_PASS=[GMAIL_PASSWORD]
     PAYPAL_CLIENT_ID=[PAYPAL_ID]
     PAYPAL_CLIENT_SECRET=[PAYPAL_SECRET]
+    GOOGLE_CLIENT_ID=[GOOGLE_ID]
+  	GOOGLE_CLIENT_SECRET=[GOOGLE_SECRET]
 
 Located at `server/.env/development.config.env`.
 
@@ -117,9 +119,15 @@ I've used the free service provided by [mLab](https://mlab.com/).
 
 **Set up PayPal payment**
 
-1. Create an account at [PayPal Developer](https://developer.paypal.com/`).
+1. Create an account at [PayPal Developer](https://developer.paypal.com/).
 2. Create an app, copy the client `ID` and `Secret` to the `.env` files.
 3. Create a sandbox account, so you can test the payment.
+
+**Set up Google authentication**
+
+1. Create an account at [Google Developer Console](https://console.developers.google.com/).
+2. Create an API Console project and client ID. Use Web browser as client type and `https://localhost/api/auth/login/google/callback` as callback url.
+3. Copy the client `ID` and `Secret` to the `.env` files.
 
 ## Usage
 
