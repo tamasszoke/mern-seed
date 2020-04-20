@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import axios from 'axios'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
 class Login extends Component {
   constructor(props) {
@@ -179,7 +180,18 @@ class Login extends Component {
                     />
                   </g>
                 </svg>
+                <font className={ styles.space }></font>
                 Continue with Google
+              </Button>
+              <Button
+                href={ `${this.props.url}/api/auth/login/github` }
+                variant="contained"
+                className={ styles.github }
+                fullWidth
+              >
+                <GitHubIcon fontSize="small"></GitHubIcon>
+                <font className={ styles.space }></font>
+                Continue with GitHub
               </Button>
             </ValidatorForm>
           </Paper>
