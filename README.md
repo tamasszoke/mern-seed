@@ -17,6 +17,7 @@ Boilerplate for MERN stack development, prepared for production.
 + Built-in dark theme switch
 + Built-in React routing, [Redux](https://redux.js.org/)
 + Built-in local authentication with [Passport](http://www.passportjs.org/)
++ Built-in Google and GitHub authentication
 + Built-in [PayPal](https://developer.paypal.com/docs/checkout/) payment (smart buttons)
 + Built-in [Socket.IO](https://socket.io/) connection
 + [EJS](https://ejs.co/) for rendering
@@ -35,6 +36,7 @@ These are the planned updates of the project.
 - Nginx server
 - ~~PayPal payment~~
 - ~~Google login~~
+- ~~GitHub login~~
 - ~~Dark theme switch~~
 - ~~Material UI v4~~
 
