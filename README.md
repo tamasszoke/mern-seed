@@ -1,4 +1,4 @@
--# MERN Boilerplate
+# MERN Boilerplate
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/tamasszoke/mern-boilerplate.svg)](https://github.com/tamasszoke/mern-boilerplate/blob/master/LICENSE)
@@ -47,6 +47,7 @@ These are the planned updates of the project.
 3. Set env variables
 4. Add SSL files
 5. Create database
+6. Set up PayPal, Google, GitHub (optional)
 
 **Clone the repository**
 
