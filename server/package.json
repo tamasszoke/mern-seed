@@ -45,7 +45,7 @@
     "helmet": "^3.12.1",
     "jwt-decode": "^2.2.0",
     "mongoose": "5.7.5",
-    "nodemailer": "^4.6.5",
+    "nodemailer": "^6.4.16",
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.12",
