@@ -56,7 +56,7 @@
     "request": "^2.81.0",
     "socket.io": "^2.1.1",
     "spdy": "^4.0.0",
-    "validator": "^10.10.0",
+    "validator": "^13.7.0",
     "webpack-node-externals": "^1.7.2",
     "winston": "3.0.0-rc6"
   }
