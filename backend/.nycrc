@@ -1,0 +1,15 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "all": true,
+  "check-coverage": true,
+  "include": [
+    "src/**/!(*.test.*).[tj]s?(x)"
+  ],
+  "exclude": [
+    "src/_tests_/**/*.*"
+  ],
+  "reporter": [
+    "text",
+    "text-summary"
+  ]
+}

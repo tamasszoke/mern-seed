@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "MERN-SEED",
+  "short_name": "MERN-SEED",
+  "author": "Tamas Szoke",
+  "description": "MERN stack boilerplate",
+  "version": "1.0.0"
+}

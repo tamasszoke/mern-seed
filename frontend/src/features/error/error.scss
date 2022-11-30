@@ -1,0 +1,52 @@
+@import '../../core/themes/themes.scss';
+
+.error-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: calc(#{$panel-width} - 20px);
+  height: calc(#{$panel-height} - 130px);
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-size: $font-size-big;
+  font-weight: normal;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: $border-radius-half;
+  overflow: hidden;
+  --animate-delay: 0.3s;
+  @include theme() {
+    color: get('color-primary');
+  }
+
+  > .content {
+    height: 100%;
+
+    > .title {
+      padding: 50px 20px 30px 20px;
+      font-size: $font-size-large;
+
+      &:first-child {
+        padding-top: 10px;
+      }
+
+      > .icon {
+        padding-right: 10px;
+      }
+    }
+
+    > .text {
+      padding: 10px 20px 10px 20px;
+      font-size: $font-size-big;
+
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}

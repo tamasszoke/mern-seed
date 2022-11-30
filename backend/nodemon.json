@@ -1,0 +1,5 @@
+{
+  "watch": "./src",
+  "ext": ".js, .mjs, .coffee, .litcoffee, .json, .ts, .yaml",
+  "exec": "ts-node --transpile-only ./src/index.ts -L"
+}

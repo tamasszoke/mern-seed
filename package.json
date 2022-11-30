@@ -1,0 +1,25 @@
+{
+  "name": "mern-seed",
+  "version": "3.0.0",
+  "description": "README.md",
+  "author": "Tamas Szoke",
+  "contact": "tamas.szoke.dev@gmail.com",
+  "scripts": {
+    "test:backend": "yarn --cwd backend/ test",
+    "test:frontend": "yarn --cwd frontend/ test",
+    "test:e2e": "yarn --cwd frontend/ test:e2e",
+    "start:backend": "yarn --cwd backend/ start",
+    "start:frontend": "yarn --cwd frontend/ start",
+    "start": "concurrently \"yarn start:backend\" \"yarn start:frontend\"",
+    "build": "yarn --cwd frontend/ build && yarn --cwd backend/ build",
+    "prod": "yarn --cwd build/ prod",
+    "prod:pm2": "yarn --cwd build/ prod:pm2",
+    "prod:pm2:kill": "yarn --cwd build/ prod:pm2:kill",
+    "docker:dev": "docker-compose -f docker-compose.development.yml up",
+    "docker:prod": "docker-compose -f docker-compose.production.yml up"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^2.0.15"
+  }
+}

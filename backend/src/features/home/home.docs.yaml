@@ -1,0 +1,45 @@
+tags:
+  name: Home
+  description: Frontend index page in production, json message in development
+paths:
+  /:
+    get:
+      tags: [Home]
+      summary: Return frontend index page in production, json message in development
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              examples:
+                development:
+                  summary: Development success response
+                  value:
+                    success: true
+                    status: 200
+                    result: true
+                    error: false
+            text/html:
+              examples:
+                production:
+                  summary: Production success response (frontend)
+                  value: <!DOCTYPE html><html lang="en">...</html>
+        500:
+          description: Server error response
+          content:
+            application/json:
+              examples:
+                development:
+                  summary: Development error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error: 'internal server error'
+                production:
+                  summary: Production error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error: 'internal server error'

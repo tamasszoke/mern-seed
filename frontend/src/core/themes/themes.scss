@@ -1,0 +1,93 @@
+// Containers
+$panel-width: 65vw;
+$panel-height: 90vh;
+
+// Fonts
+$font-size-small: 16px;
+$font-size-normal: 18px;
+$font-size-big: 24px;
+$font-size-large: 30px;
+
+// Misc
+$bg-opacity-min: 0.1;
+$box-shadow: 0 0 100px;
+$box-shadow-opacity: 0.3;
+$border-radius-half: 20px 0 0 20px;
+$border-radius-small: 5px;
+$border-radius-big: 20px;
+$hover-transition: all 0.15s ease;
+$hover-transition-slow: all 0.3s ease;
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    @include theme() {
+      background: rgba(get('bg-scrollbar-track'), 1);
+    }
+  }
+  &::-webkit-scrollbar-thumb {
+    @include theme() {
+      background: rgba(get('bg-scrollbar-thumb'), 1);
+    }
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    @include theme() {
+      background: rgba(get('bg-scrollbar-thumb-hover'), 1);
+    }
+  }
+}
+
+@mixin backdrop-filter {
+  backdrop-filter: blur(10px);
+}
+
+$themes: (
+  theme-light: (
+    'bg-primary': #b9b9c0,
+    'bg-secondary': #d1d2f1,
+    'bg-panel-primary': #ffffff,
+    'bg-panel-secondary': #030303,
+    'bg-square': #333333,
+    'bg-button': #cccccc,
+    'bg-button-hover': #eeeeee,
+    'bg-shadow': #333333,
+    'bg-scrollbar-track': #cfcfcf,
+    'bg-scrollbar-thumb': #888888,
+    'bg-scrollbar-thumb-hover': #555555,
+    'color-primary': #111111,
+    'color-secondary': #666666,
+    'color-input-error': #d22b2b,
+  ),
+  theme-dark: (
+    'bg-primary': #414141,
+    'bg-secondary': #111111,
+    'bg-panel-primary': #333333,
+    'bg-panel-secondary': #4f4f4f,
+    'bg-square': #cccccc,
+    'bg-button': #4f4f4f,
+    'bg-button-hover': #666666,
+    'bg-shadow': #111111,
+    'bg-scrollbar-track': #333333,
+    'bg-scrollbar-thumb': #111111,
+    'bg-scrollbar-thumb-hover': #000000,
+    'color-primary': #eeeeee,
+    'color-secondary': #aaaaaa,
+    'color-input-error': #ff4433,
+  ),
+);
+
+@mixin theme() {
+  @each $theme, $map in $themes {
+    $theme-map: $map !global;
+    .#{$theme} & {
+      @content;
+    }
+  }
+  $theme-map: null !global;
+}
+
+@function get($key) {
+  @return map-get($theme-map, $key);
+}

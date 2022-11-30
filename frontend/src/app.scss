@@ -1,0 +1,23 @@
+@import './core/themes/themes';
+
+.app-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: all 0.3s ease !important;
+  overflow: hidden;
+}
+
+.app-content {
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  @include theme() {
+    background: get('bg-primary');
+  }
+}

@@ -1,0 +1,90 @@
+@import '../../../core/themes/themes.scss';
+
+.profile-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: calc(#{$panel-width} - 20px);
+  height: calc(#{$panel-height} - 130px);
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-size: $font-size-big;
+  font-weight: normal;
+  text-align: left;
+  box-sizing: border-box;
+  border-radius: $border-radius-big;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  --animate-delay: 0.3s;
+  overflow: hidden;
+  @include backdrop-filter;
+  @include theme() {
+    color: get('color-primary');
+    background: rgba(get('bg-panel-primary'), $bg-opacity-min);
+    box-shadow: $box-shadow rgba(get('bg-shadow'), $box-shadow-opacity);
+  }
+
+  > .content {
+    height: 100%;
+
+    .icon {
+      font-size: $font-size-big;
+      padding-right: 10px;
+    }
+
+    > .title {
+      padding: 50px 20px 30px 20px;
+      font-size: $font-size-big;
+
+      &:first-child {
+        padding-top: 10px;
+      }
+    }
+
+    > .text {
+      padding: 0 20px;
+      font-size: $font-size-small;
+
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+
+    > .button-remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30%;
+      margin: 0;
+      margin: 10px;
+      padding: 10px;
+      font-size: $font-size-small;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: $border-radius-small;
+      transition: $hover-transition-slow;
+      text-align: center;
+      @include theme() {
+        color: get('color-primary');
+        background: get('bg-button');
+      }
+
+      &:hover {
+        @include theme() {
+          background: get('bg-button-hover');
+        }
+      }
+    }
+
+    > .loader {
+      margin-top: 10%;
+      text-align: center;
+    }
+  }
+}

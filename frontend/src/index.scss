@@ -1,0 +1,31 @@
+@import './core/themes/themes';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: $font-size-big;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: default;
+  background-color: #000000;
+
+  h1 {
+    font-size: $font-size-large;
+  }
+}
+
+.animation-flash {
+  animation: 0.5s flash ease infinite;
+}
+
+@keyframes flash {
+  from,
+  to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

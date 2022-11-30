@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="content">
+      <div class="title">Welcome!</div>
+      <br />
+      <p class="subtitle">Successfully registered!</p>
+      <p class="subtitle">Your activation code is <b><%= data.code %></b></p>
+      <br />
+      <p class="text">
+        Go back to our site or click the link below and enter the code.
+      </p>
+      <a
+        class="link"
+        href="<%= settings.url.index %>/auth/activation/<%= data.user.id %>/<%= data.code %>"
+      >
+        <%= settings.url.index %>/auth/activation/<%= data.user.id %>/<%=
+        data.code %>
+      </a>
+    </div>
+  </body>
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  body {
+    font-family: sans-serif;
+    text-align: left;
+  }
+  .content {
+    padding: 30px;
+    padding-bottom: 40px;
+    background: rgba(50, 50, 50, 1);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+  }
+  .title {
+    font-size: 36px;
+  }
+  .subtitle {
+    font-size: 24px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .link {
+    padding: 10px;
+    color: rgba(17, 17, 17, 1);
+    background: rgba(200, 200, 200, 1);
+    border-radius: 5px;
+  }
+</style>

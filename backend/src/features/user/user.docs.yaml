@@ -1,0 +1,238 @@
+tags:
+  name: User
+  description: User feature
+paths:
+  /api/user/profile/check:
+    post:
+      tags: [Auth]
+      summary: Return all user data
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        401:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 401
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'internal server error',
+                      }
+  /api/user/profile/remove:
+    post:
+      tags: [Auth]
+      summary: Remove user account
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result: true
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        401:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 401
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'internal server error',
+                      }
+components:
+  schemas:
+    UserModel:
+      description: 'User database model'
+      required: [email, created, updated]
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: '633ad08a63a7e2e28558b2d6'
+        email:
+          type: string
+          format: email
+          minLength: 5
+          maxLength: 100
+          example: 'johndoe@example.com'
+        name:
+          type: string
+          minLength: 5
+          maxLength: 100
+          example: 'John Doe'
+        password:
+          type: string
+          minLength: 5
+          maxLength: 1000
+          example: '558ba633ad85r7882d6087gjh58b2d663a7e2e2'
+        salt:
+          type: string
+          minLength: 5
+          maxLength: 20
+          example: 'i8e8495gbglk8558b2d6'
+        active:
+          type: boolean
+          default: false
+          example: true
+        activationCode:
+          type: string
+          default: "''"
+          example: '3567'
+        recoveryCode:
+          type: string
+          default: "''"
+          example: '5643'
+        refreshToken:
+          type: object
+          properties:
+            token:
+              type: string
+              minLength: 5
+              maxLength: 1000
+              example: '6553ad6b2da8a63a8a7e2e28638bda62'
+            expiration:
+              type: string
+              minLength: 5
+              maxLength: 500
+              example: '2022-07-14T10:07:21.142+00:00'
+        created:
+          type: date
+          example: '2022-07-03T13:17:15.271+00:00'
+        updated:
+          type: date
+          example: '2022-07-03T13:17:15.271+00:00'
+      example:
+        _id: '633ad08a63a7e2e28558b2d6'
+        email: 'johndoe@example.com'
+        name: 'John Doe'
+        password: '558ba633ad85r7882d6087gjh58b2d663a7e2e2'
+        salt: 'i8e8495gbglk8558b2d6'
+        active: true
+        activationCode: '3567'
+        recoverycode: '5643'
+        refreshToken:
+          token: '6553ad6b2da8a63a8a7e2e28638bda62'
+          expiration: '2022-07-14T10:07:21.142+00:00'
+        created: '2022-07-03T13:17:15.271+00:00'
+        updated: '2022-07-03T13:17:15.271+00:00'

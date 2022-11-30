@@ -1,0 +1,134 @@
+@import '../../../core/themes/themes.scss';
+
+.reset-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: calc(#{$panel-width} - 20px);
+  height: calc(#{$panel-height} - 130px);
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-size: $font-size-big;
+  font-weight: normal;
+  text-align: left;
+  box-sizing: border-box;
+  border-radius: $border-radius-big;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  --animate-delay: 0.3s;
+  overflow: hidden;
+  @include backdrop-filter;
+  @include theme() {
+    color: get('color-primary');
+    background: rgba(get('bg-panel-primary'), $bg-opacity-min);
+    box-shadow: $box-shadow rgba(get('bg-shadow'), $box-shadow-opacity);
+  }
+
+  > .content {
+    height: 100%;
+
+    .icon {
+      padding-right: 10px;
+    }
+
+    > .title {
+      padding: 50px 20px 30px 20px;
+      font-size: $font-size-big;
+
+      &:first-child {
+        padding-top: 10px;
+      }
+    }
+
+    > .text {
+      padding: 10px 20px 10px 20px;
+      font-size: $font-size-normal;
+
+      &:last-child {
+        padding-bottom: 20px;
+      }
+
+      > .link {
+        @include theme() {
+          color: get('color-primary');
+        }
+      }
+    }
+
+    > .form {
+      text-align: center;
+
+      > *:focus {
+        outline: none;
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+      }
+
+      input[data-autocompleted] {
+        background-color: transparent !important;
+      }
+
+      input::placeholder {
+        @include theme() {
+          color: get('color-primary');
+        }
+      }
+
+      > .password-input {
+        display: block;
+        width: 30%;
+        margin: 3% auto 0 auto;
+        padding: 10px;
+        font-size: $font-size-normal;
+        border-radius: $border-radius-small;
+        background: transparent !important;
+        @include theme() {
+          color: get('color-primary');
+          border: 1px solid rgba(get('color-primary'), 0.1);
+        }
+      }
+
+      > .input-error {
+        @include theme() {
+          border: 1px solid get('color-input-error');
+        }
+      }
+
+      > .button-submit {
+        width: 30%;
+        margin: 0;
+        margin-top: 5%;
+        padding: 10px;
+        font-size: $font-size-big;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        border-radius: $border-radius-small;
+        transition: $hover-transition-slow;
+        @include theme() {
+          color: get('color-primary');
+          background: get('bg-button');
+        }
+
+        &:hover {
+          @include theme() {
+            background: get('bg-button-hover');
+          }
+        }
+      }
+    }
+
+    > .loader {
+      margin-top: 10%;
+      text-align: center;
+    }
+  }
+}

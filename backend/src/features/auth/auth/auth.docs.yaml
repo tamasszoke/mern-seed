@@ -1,0 +1,574 @@
+tags:
+  name: Auth
+  description: User authentication feature
+paths:
+  /api/auth/local/check:
+    get:
+      tags: [Auth]
+      summary: Return users login status
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/join:
+    put:
+      tags: [Auth]
+      summary: Register user, send activation email
+      parameters:
+        - in: body
+          name: email
+          schema:
+            type: string
+            minimum: 5
+            maximum: 100
+            example: 'johndoe@example.com'
+        - in: body
+          name: password
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: 'JohnDoe12345'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    value:
+                      success: false
+                      status: 400
+                      result: false
+                      error:
+                        { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/resend:
+    post:
+      tags: [Auth]
+      summary: Resend registration email with new activation code
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/activate:
+    post:
+      tags: [Auth]
+      summary: Activate user account after registration
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+        - in: body
+          name: activationCode
+          schema:
+            type: string
+            minimum: 4
+            maximum: 4
+            example: '7239'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/login:
+    post:
+      tags: [Auth]
+      summary: Authenticate user
+      parameters:
+        - in: body
+          name: email
+          schema:
+            type: string
+            minimum: 5
+            maximum: 100
+            example: 'johndoe@example.com'
+        - in: body
+          name: password
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: 'JohnDoe12345'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/logout:
+    get:
+      tags: [Auth]
+      summary: Log user out
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result: true
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/recover:
+    post:
+      tags: [Auth]
+      summary: Recover user account by email
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+        - in: body
+          name: activationCode
+          schema:
+            type: string
+            minimum: 4
+            maximum: 4
+            example: '7239'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+  /api/auth/local/reset:
+    post:
+      tags: [Auth]
+      summary: Reset user password after recovery
+      parameters:
+        - in: body
+          name: id
+          schema:
+            type: string
+            minimum: 5
+            maximum: 1000
+            example: '633ad08a63a7e2e28558b2d6'
+        - in: body
+          name: activationCode
+          schema:
+            type: string
+            minimum: 4
+            maximum: 4
+            example: '7239'
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                success:
+                  summary: Success response
+                  value:
+                    success: true
+                    status: 200
+                    result:
+                      id: '633ad08a63a7e2e28558b2d6'
+                      email: 'johndoe@example.com'
+                      active: true
+                      created: '2022-07-03T13:17:15.271+00:00'
+                      updated: '2022-07-03T13:17:15.271+00:00'
+                    error: false
+        400:
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 400
+                    result: false
+                    error:
+                      { type: 'client', code: 1001, message: 'bad request' }
+        500:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    success: false
+                    status: 500
+                    result: false
+                    error:
+                      {
+                        type: 'server',
+                        code: 5000,
+                        message: 'Internal server error',
+                      }
+components:
+  schemas:
+    UserResponse:
+      description: Default user data response
+      type: object
+      properties:
+        id:
+          type: string
+          example: '633ad08a63a7e2e28558b2d6'
+        email:
+          type: string
+          example: 'johndoe@example.com'
+        active:
+          type: boolean
+          example: true
+        created:
+          type: string
+          example: '2022-07-03T13:17:15.271+00:00'
+        updated:
+          type: string
+          example: '2022-07-03T13:17:15.271+00:00'
+      example:
+        id: '633ad08a63a7e2e28558b2d6'
+        email: 'johndoe@example.com'
+        active: true
+        created: '2022-07-03T13:17:15.271+00:00'
+        updated: '2022-07-03T13:17:15.271+00:00'

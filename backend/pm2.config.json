@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "exec_mode": "cluster",
+      "instances": "1",
+      "name": "MERN-SEED",
+      "script": "index.js",
+      "watch": false,
+      "ignore_watch": ["*.log"]
+    }
+  ]
+}

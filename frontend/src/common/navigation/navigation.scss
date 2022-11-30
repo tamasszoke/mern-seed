@@ -1,0 +1,53 @@
+@import '../../core/themes/themes.scss';
+
+.navigation-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+  @include theme() {
+    color: get('color-primary');
+  }
+
+  > .title {
+    font-size: $font-size-small;
+    text-transform: uppercase;
+  }
+
+  > .button {
+    display: inline-block;
+    padding: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: $font-size-small;
+    text-decoration: none;
+    cursor: pointer;
+    transition: $hover-transition;
+    @include theme() {
+      color: get('color-primary');
+    }
+
+    &:hover {
+      @include theme() {
+        color: get('color-secondary');
+      }
+    }
+  }
+
+  .icon {
+    position: relative;
+    right: 5px;
+  }
+
+  > .theme {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $font-size-big;
+    cursor: pointer;
+  }
+}
