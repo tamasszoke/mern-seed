@@ -174,7 +174,7 @@ If you want to use a relational or any other database, follow these steps:
 
 1. Install the appropriate package on backend
 2. Configure the .env files in `./backend/.env/` folder
-3. Set up the connection in `./backend/src/core/config/database.ts` file
+3. Set up the connection in `./backend/src/core/config/components/database.ts` file
 4. Adjust the code in `./backend/src/features/auth/` folder
 
 ## Email setup
