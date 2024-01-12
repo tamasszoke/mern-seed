@@ -6,11 +6,11 @@
 ![Docker](https://img.shields.io/badge/Docker-v20-informational)
 ![Cypress](https://img.shields.io/badge/Cypress-v10-informational)
 
-Modern, complete boilerplate for MERN stack development with TypeScript and Docker.
+Boilerplate for MERN stack development with TypeScript and Docker.
 
 ## Introduction
 
-A modern, clean, and consistent boilerplate using the best practices for Node.js and React, keeping scalability and performance in mind. The advanced structure allows building applications of any size.
+Modern, clean, and consistent TypeScript boilerplate that incorporates best practices for Node.js and React, keeping scalability and performance in mind. The advanced structure enables the development of applications of any size. It includes authentication and end-to-end tests, with a script for the [quick setup](#automated-setup).
 
 ## Support
 
@@ -108,7 +108,9 @@ You can support the project on [ko-fi](https://ko-fi.com/tamas0547).
 
 # Preparation
 
-Preparing before the project setup.
+These are necessary steps before setting up the project.
+
+An [automated project setup script](#automated-setup) is available. If you will use it, you can skip the SSL and JWT setup, but you will still need to setup a [database](#database-setup) and a [mailbox](#email-setup).
 
 ## Clone the repository
 
@@ -157,7 +159,9 @@ You can also generate those using online tools such as the [jsencript demo](http
 
 ## Database setup
 
-This project prepared for MongoDB.
+This project was prepared to use MongoDB.
+
+You can also use any database, just follow the steps below.
 
 ### Mongodb
 
@@ -197,9 +201,11 @@ You can also create a local SMTP server to send and receive emails, but this req
 
 ## Automated setup
 
+Don't forget to setup a [database](#database-setup) and a [mailbox](#email-setup) before using the script!
+
 Run `./scripts/setup.sh` from the root folder and follow the instructions.
 
-Jump to the [usage section](#usage)!
+If it's ready, you can jump to the [usage section](#usage)!
 
 ## Manual setup
 
